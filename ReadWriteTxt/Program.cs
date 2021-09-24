@@ -18,18 +18,23 @@ namespace ReadWriteTxt
 
             List<string> textRead = new List<string>();
 
-            // Построчное чтение до конца файла из пути readPath через цикл While
+            
             using (StreamReader sr = new StreamReader(readPath))
             {
-                string line;
-                while ((line = sr.ReadLine()) != null)
+                string line;               
+                while ((line = sr.ReadLine()) != null) // построчное чтение до конца файла 
                 {
-                    textRead.Add(line);
+                    string[] lineSubstring = line.Split().Select(s => s).ToArray(); // разделяем строку на отдельные подстроки
+                    foreach (var item in lineSubstring)
+                    {
+                        if (item != "") // Добавляем в лист НЕ пустые элементы
+                            textRead.Add(item);
+                    }
                 }
-            }
+            }           
 
             // Сортировка текста из файла
-            List<string> writeText = textRead.OrderBy(o => o).ToList();
+            List<string> writeText = textRead.OrderBy(o => int.Parse(o)).ToList();
 
             // Вывод на консоль
             foreach (var item in writeText)
