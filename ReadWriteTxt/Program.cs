@@ -27,7 +27,7 @@ namespace ReadWriteTxt
                     string[] lineSubstring = line.Split().Select(s => s).ToArray(); // разделяем строку на отдельные подстроки
                     foreach (var item in lineSubstring)
                     {
-                        if (item != "") // Добавляем в лист НЕ пустые элементы
+                        if (int.TryParse(item, out int result)) // Добавляем в лист только те элементы, которые возможно пребразовать в int
                             textRead.Add(item);
                     }
                 }
